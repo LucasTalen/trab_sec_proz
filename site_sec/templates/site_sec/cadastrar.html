@@ -6,6 +6,8 @@
 	<title>Cadastro</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">    
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 	
 </head>
@@ -14,28 +16,29 @@
 	<div class="limiter">
 		<div class="container-login">
 			<div class="wrap-login">
-				<form class="login-form">
+				<form class="login-form" id="login-form" method="post" action="/form-cadastro/">
+					{% csrf_token %}
 					<span class="login-form-title">Cadastro</span>
 	
                     <div class="wrap-input">
-						<input class="input" type="text" name="nome" placeholder="Nome">
+						<input class="input" type="text" id="nome" name="nome" placeholder="Nome">
 					</div>
                     
                     <div class="wrap-input">
-						<input class="input" type="email" name="email" placeholder="Email">
+						<input class="input" type="email" id="email" name="email" placeholder="Email">
 					</div>
 
 					<div class="wrap-input">
-						<input class="input" type="password" name="pass" placeholder="Senha">
+						<input class="input" type="password" id="senha" name="senha" placeholder="Senha">
 					</div>
                     <div class="wrap-input">
-						<input class="input" type="password" name="pass" placeholder="Confimar Senha">
+						<input class="input" type="password" id="senha_novamente" name="senha_novamente" placeholder="Confimar Senha">
 					</div>
 
 					<div class="container-login-form-btn">
 						<div class="wrap-login-form-btn">
 							<div class="login-form-bgbtn"></div>
-							<button class="login-form-btn">Cadastrar</button>
+							<button class="login-form-btn" id="login-form-btn" type="submit">Cadastrar</button>
 						</div>
 					</div>
 
@@ -48,6 +51,27 @@
 		</div>
 	</div>
 	
+	<script>
+		$('#login-form-btn').prop('disabled', true);
+
+		function verificarSenha() {
+			var senha = $('input[name="senha"]').val();
+			var senha_novamente = $('input[name="senha_novamente"]').val(); // Corrigido de .value para .val()
+		
+			if (senha.length < 8) { // Corrigido a condição para verificar se a senha é menor que 8 caracteres
+				alert("A senha deve ter pelo menos 8 caracteres.");
+			} else if (senha !== senha_novamente) { // Corrigido a condição para verificar se as senhas são diferentes
+				alert("As senhas não coincidem.");
+				$('#login-form-btn').prop('disabled', true); // Desabilitar o botão se as senhas não coincidirem
+			} else {
+				$('#login-form-btn').prop('disabled', false); // Habilitar o botão se todas as condições forem atendidas
+			}
+		}
+		
+		$('input[name="senha_novamente"]').on('blur', verificarSenha);
+		
+		
+	</script>
 
 </body>
 </html> 
