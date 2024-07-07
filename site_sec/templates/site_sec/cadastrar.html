@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Cadastro</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">    
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login">
+			<div class="wrap-login">
+				<form class="login-form">
+					<span class="login-form-title">Cadastro</span>
+	
+                    <div class="wrap-input">
+						<input class="input" type="text" name="nome" placeholder="Nome">
+					</div>
+                    
+                    <div class="wrap-input">
+						<input class="input" type="email" name="email" placeholder="Email">
+					</div>
+
+					<div class="wrap-input">
+						<input class="input" type="password" name="pass" placeholder="Senha">
+					</div>
+                    <div class="wrap-input">
+						<input class="input" type="password" name="pass" placeholder="Confimar Senha">
+					</div>
+
+					<div class="container-login-form-btn">
+						<div class="wrap-login-form-btn">
+							<div class="login-form-bgbtn"></div>
+							<button class="login-form-btn">Cadastrar</button>
+						</div>
+					</div>
+
+					<div class="text-center">
+						<span >Tem uma conta?</span>
+						<a href="/login">Login</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+</body>
+</html> 
