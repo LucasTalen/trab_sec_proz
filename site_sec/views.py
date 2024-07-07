@@ -36,14 +36,27 @@ def form_cadastro(request):
         return render(request, 'site_sec/cadastrar.html')
     
 def form_login(request):
-    email = request.POST.get('nome')
+    email = request.POST.get('email')
     senha = request.POST.get('senha')
     senha_usuario = ''
     
     try:
         senha_usuario = fazer_login(email)
+        response = render(request, 'site_sec/index.html')
+        response.set_cookie('email', email, max_age=None, path='/')
+        
+        request.session['email'] = email
+        request.session.modified = True
+        
     except:
         print("Usuario não existe")
         
     if senha == senha_usuario:
-        return render(request, 'site_sec/index.html')
+        return response
+    else:
+        return HttpResponse(f"senha bd: {senha_usuario}, sua senha: {senha}, email: {email}")
+    
+
+def check_user_email_cookie(request):
+    email = request.COOKIES.get('user_email', 'Cookie not set')
+    return HttpResponse(f"User Email Cookie: {email}")

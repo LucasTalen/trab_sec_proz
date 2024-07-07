@@ -13,15 +13,16 @@
 	<div class="limiter">
 		<div class="container-login">
 			<div class="wrap-login">
-				<form class="login-form">
+				<form class="login-form" id="login-form" method="post" action="/form-login/">
+					{% csrf_token %}
 					<span class="login-form-title">Login</span>
 	
                     <div class="wrap-input">
-						<input class="input" type="text" name="email" placeholder="Email">
+						<input class="input" type="text" name="email" id="email" placeholder="Email">
 					</div>
 
 					<div class="wrap-input">
-						<input class="input" type="password" name="pass" placeholder="Senha">
+						<input class="input" type="password" name="senha" id="senha" placeholder="Senha">
 					</div>
 
 					<div class="container-login-form-btn">
