@@ -15,3 +15,7 @@ def cadastrar_usuario(nome, email, senha):
 def fazer_login(email):
     usuario = Usuario.objects.get(email=email)
     return usuario.senha
+
+def buscar_perguntas(tipo):
+    perguntas = Perguntas.objects.filter(tipo=tipo).order_by('?')[:10]
+    return perguntas

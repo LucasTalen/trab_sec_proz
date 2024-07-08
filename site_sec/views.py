@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .admin import cadastrar_usuario, fazer_login
+from .admin import *
 
 
 # Create your views here.
@@ -19,6 +19,9 @@ def cadastro(request):
         request,
         'site_sec/cadastrar.html'
     )
+
+def curso_aluno(request):
+    return render(request, 'site_sec/curso_alunos.html')
 
 def form_cadastro(request):
     if request.method == 'POST':
@@ -60,3 +63,11 @@ def form_login(request):
 def check_user_email_cookie(request):
     email = request.COOKIES.get('user_email', 'Cookie not set')
     return HttpResponse(f"User Email Cookie: {email}")
+
+def prova_aluno(request):
+    perguntas = buscar_perguntas("Aluno")
+    return render(request, 'site_sec/prova_aluno.html', {'perguntas': perguntas})
+
+def prova_professor(request):
+    perguntas = buscar_perguntas("Professor")
+    return render(request, 'site_sec/prova_aluno.html', {'perguntas': perguntas})
