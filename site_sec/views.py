@@ -1,11 +1,19 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.core.cache import cache
 from .admin import *
+from .funcoes import *
+import json
 
 
 # Create your views here.
 def em_construcao(request):
     return HttpResponse("Em construção")
+
+
+def quiz_alunos(request):
+    return render(request, 'site_sec/quiz_aluno.html')
 
 
 def login(request):
@@ -22,6 +30,9 @@ def cadastro(request):
 
 def curso_aluno(request):
     return render(request, 'site_sec/curso_alunos.html')
+
+def index(request):
+    return render(request, 'site_sec/index.html')
 
 def form_cadastro(request):
     if request.method == 'POST':
@@ -66,8 +77,20 @@ def check_user_email_cookie(request):
 
 def prova_aluno(request):
     perguntas = buscar_perguntas("Aluno")
-    return render(request, 'site_sec/prova_aluno.html', {'perguntas': perguntas})
+    perguntas_html = gerar_perguntas_html(perguntas)
+    return render(request, 'site_sec/prova_aluno.html', {'perguntas': perguntas_html})
 
 def prova_professor(request):
     perguntas = buscar_perguntas("Professor")
+    perguntas_html = gerar_perguntas_html(perguntas)
+    print(perguntas_html)
     return render(request, 'site_sec/prova_aluno.html', {'perguntas': perguntas})
+
+def get_result_prova_aluno(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        email = request.COOKIES.get('email')
+        
+        gerar_nota_aluno(data,email)
+        return JsonResponse({'status':'success'})
+    return JsonResponse({'status':'fail'}, status=400)

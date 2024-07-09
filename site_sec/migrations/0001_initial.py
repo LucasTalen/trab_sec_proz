@@ -17,6 +17,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('tipo', models.CharField(choices=[('Aluno', 'Aluno'), ('Professor', 'Professor')], max_length=10)),
+                ('pergunta_index', models.TextField()),
                 ('pergunta', models.TextField()),
                 ('resposta', models.CharField(choices=[('a', 'a'), ('b', 'b'), ('c', 'c'), ('d', 'd')], max_length=1)),
             ],

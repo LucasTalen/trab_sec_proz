@@ -1,1 +1,1 @@
-default_app_config = 'site_sec.apps.MyAppConfig'
+default_app_config = 'site_sec.apps.SiteSecConfig'

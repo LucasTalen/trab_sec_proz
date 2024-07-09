@@ -26,6 +26,7 @@ class Perguntas(models.Model):
         ('Aluno', 'Aluno'),
         ('Professor', 'Professor'),
     ]
+    pergunta_index = models.TextField(blank=True, null=True)
     RESPOSTA_CHOICES = [
         ('a', 'a'),
         ('b', 'b'),

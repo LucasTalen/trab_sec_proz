@@ -56,15 +56,15 @@
 
 		function verificarSenha() {
 			var senha = $('input[name="senha"]').val();
-			var senha_novamente = $('input[name="senha_novamente"]').val(); // Corrigido de .value para .val()
+			var senha_novamente = $('input[name="senha_novamente"]').val(); 
 		
-			if (senha.length < 8) { // Corrigido a condição para verificar se a senha é menor que 8 caracteres
+			if (senha.length < 8) { 
 				alert("A senha deve ter pelo menos 8 caracteres.");
-			} else if (senha !== senha_novamente) { // Corrigido a condição para verificar se as senhas são diferentes
+			} else if (senha !== senha_novamente) { 
 				alert("As senhas não coincidem.");
-				$('#login-form-btn').prop('disabled', true); // Desabilitar o botão se as senhas não coincidirem
+				$('#login-form-btn').prop('disabled', true); 
 			} else {
-				$('#login-form-btn').prop('disabled', false); // Habilitar o botão se todas as condições forem atendidas
+				$('#login-form-btn').prop('disabled', false); 
 			}
 		}
 		
