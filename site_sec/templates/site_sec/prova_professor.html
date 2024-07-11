@@ -60,8 +60,8 @@
         </div>
       </header>
       <div class="container">
-    <h1>Prova Aluno</h1>
-    <form id="prova-aluno">
+    <h1>Prova Professor</h1>
+    <form id="prova-professor">
         {% for pergunta in perguntas %}
         <br>
             {{ pergunta|safe}}
@@ -71,8 +71,7 @@
             <br>
             <p id="result"></p>
             <br>
-
-    </form>    
+        </form>    
     </div>
 
     <div class="container d-flex flex-column">
@@ -90,7 +89,6 @@
               <li class="ms-3"><a class="text-body-secondary" href="/login/"><i class="bi bi-box-arrow-in-left"></i></a></li> </ul>
         </footer>
 
-      
         </div>
 
         <script>
@@ -109,7 +107,7 @@
         
                   
                   $.ajax({
-                    url: '/submit/prova/aluno/',
+                    url: '/submit/prova/professor/',
                     type: 'POST',
                     data: JSON.stringify({questions: questions }),
                     contentType: 'application/json',

@@ -79,7 +79,7 @@ def gerar_nota_aluno(respostas,email):
         gabarito_resp = list(gabarito)[0]['resposta']
         if str(resposta['answer']).upper() == str(gabarito_resp).upper():
             nota += 1
-    if nota >= 5:
+    if nota >= 7:
         try:
             usuario = Usuario.objects.get(email=email)
             certificado = Certificado(id_usuario_certificado=usuario, tipo='Aluno')
@@ -92,6 +92,26 @@ def gerar_nota_aluno(respostas,email):
             print(f'Usuário com o e-mail {email} não encontrado.')
     print('nota:', nota)
 
+
+def gerar_nota_professor(respostas,email):
+    nota = 0
+    for resposta in list(respostas['questions']):
+        gabarito = buscar_resposta(resposta['question'])
+        gabarito_resp = list(gabarito)[0]['resposta']
+        if str(resposta['answer']).upper() == str(gabarito_resp).upper():
+            nota += 1
+    if nota >= 7:
+        try:
+            usuario = Usuario.objects.get(email=email)
+            certificado = Certificado(id_usuario_certificado=usuario, tipo='Professor')
+            certificado.save()
+            
+            
+            print(f'Certificado de tipo Professor criado para o usuário {email}.')
+        
+        except Usuario.DoesNotExist:
+            print(f'Usuário com o e-mail {email} não encontrado.')
+    print('nota:', nota)
     
 # texto = """
 # O que é 2FA? --A) Uma senha que é usada duas vezes. --B) Um sistema de backup automático. --C) Autenticação de dois fatores.--D) Um tipo de firewall.

@@ -17,6 +17,9 @@ def em_construcao(request):
 def quiz_alunos(request):
     return render(request, 'site_sec/quiz_aluno.html')
 
+def curso_professor(request):
+    return render(request, 'site_sec/curso_professor.html')
+
 @csrf_exempt
 def login(request):
     return render(
@@ -91,8 +94,21 @@ def prova_aluno(request):
 def prova_professor(request):
     perguntas = buscar_perguntas("Professor")
     perguntas_html = gerar_perguntas_html(perguntas)
-    print(perguntas_html)
-    return render(request, 'site_sec/prova_aluno.html', {'perguntas': perguntas})
+    return render(request, 'site_sec/prova_professor.html', {'perguntas': perguntas_html})
+
+
+
+@csrf_exempt
+def get_result_prova_professor(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        email = request.COOKIES.get('email')
+        
+        gerar_nota_professor(data,email)
+        return JsonResponse({'status':'success'})
+    return JsonResponse({'status':'fail'}, status=400)
+
+
 
 @csrf_exempt
 def get_result_prova_aluno(request):
